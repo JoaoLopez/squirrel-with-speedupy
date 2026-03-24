@@ -524,6 +524,7 @@ class Datacube(Spectra):
         )
 
         # Copy the state of the spectra
+        spectra.wavelengths_frame = deepcopy(self.wavelengths_frame)
         spectra.spectra_modifications = deepcopy(self.spectra_modifications)
         spectra.velocity_scale = deepcopy(self.velocity_scale)
 
@@ -736,6 +737,18 @@ class VoronoiBinnedSpectra(Spectra):
         spectra.velocity_scale = deepcopy(self.velocity_scale)
 
         return spectra
+
+
+class PowerBinnedSpectra(VoronoiBinnedSpectra):
+    """A class to store binned spectra using power binning.
+
+    This class is functionally identical to `VoronoiBinnedSpectra`. This class extends the Spectra class to handle data that has been binned using
+    power-law binning. It includes additional attributes to store the coordinates of the
+    original datacube's spatial pixels, the bin numbers, and the coordinates of the bin
+    centers, among other properties.
+    """
+
+    pass
 
 
 class RadiallyBinnedSpectra(Spectra):
