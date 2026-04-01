@@ -149,6 +149,7 @@ def cell_13(voronoi_binned_spectra):
     plt.legend()
     plt.savefig('squirrel3.png')
 
+#@deterministic
 def cell_14(voronoi_binned_spectra):
     voronoi_binned_spectra = Pipeline.log_rebin(
         voronoi_binned_spectra, num_samples_for_covariance=1000
@@ -188,6 +189,7 @@ def cell_17(voronoi_binned_spectra):
 
 def cell_18(voronoi_binned_spectra, template):
     for i in range(voronoi_binned_spectra.flux.shape[1]):
+        #@deterministic
         ppxf_fit = Pipeline.run_ppxf(
             voronoi_binned_spectra,
             template,
@@ -199,58 +201,20 @@ def cell_18(voronoi_binned_spectra, template):
         ppxf_fit.plot()
         plt.savefig(f'squirrel{i+4}.png')
 
-import time
-
-s0 = time.perf_counter()
 data, header, noise = cell_2()
-s1 = time.perf_counter()
 cell_3(data, noise)
-s2 = time.perf_counter()
 cell_4(data)
-s3 = time.perf_counter()
 datacube = cell_5(data, header, noise)
-s4 = time.perf_counter()
 cell_6(datacube)
-s5 = time.perf_counter()
 datacube = cell_7(datacube)
-s6 = time.perf_counter()
 cell_8(datacube)
-s7 = time.perf_counter()
 cell_9(datacube)
-s8 = time.perf_counter()
 cell_10(datacube)
-s9 = time.perf_counter()
 bin_mapping_outputs = cell_11(datacube)
-s10 = time.perf_counter()
 power_binned_spectra = cell_12(datacube, bin_mapping_outputs)
-s11 = time.perf_counter()
 cell_13(power_binned_spectra)
-s12 = time.perf_counter()
 power_binned_spectra = cell_14(power_binned_spectra)
-s13 = time.perf_counter()
 cell_15(datacube, power_binned_spectra)
-s14 = time.perf_counter()
 cell_16(power_binned_spectra)
-s15 = time.perf_counter()
 template = cell_17(power_binned_spectra)
-s16 = time.perf_counter()
 cell_18(power_binned_spectra, template)
-s17 = time.perf_counter()
-
-print(s1-s0)
-print(s2-s1)
-print(s3-s2)
-print(s4-s3)
-print(s5-s4)
-print(s6-s5)
-print(s7-s6)
-print(s8-s7)
-print(s9-s8)
-print(s10-s9)
-print(s11-s10)
-print(s12-s11)
-print(s13-s12)
-print(s14-s13)
-print(s15-s14)
-print(s16-s15)
-print(s17-s16)
