@@ -259,6 +259,7 @@ def cell_6(wavelength_start, wavelength_end, wavelength_pixel_size, wavelength_l
 
 
 #################### Cell 7
+#@deterministic
 def cell_7(num_pixel, wavelengths, source_light, spiral_spectra, point_source_light, quasar_spectra, velocity_dispersion_field, wavelength_pixel_size, lens_light, elliptical_spectra):
     source_data_cube = np.zeros((num_pixel, num_pixel, len(wavelengths)))
     quasar_data_cube = np.zeros((num_pixel, num_pixel, len(wavelengths)))
@@ -285,8 +286,6 @@ def cell_7(num_pixel, wavelengths, source_light, spiral_spectra, point_source_li
     datacube = source_data_cube + quasar_data_cube + lens_data_cube
 
     datacube = np.transpose(datacube, axes=(2, 0, 1))
-
-    print(f"Datacube shape: {datacube.shape}")
 
     return lens_data_cube, datacube
 
@@ -379,6 +378,7 @@ lens_data_cube, datacube = cell_7(num_pixel,
                                   wavelength_pixel_size,
                                   lens_light,
                                   elliptical_spectra)
+print(f"Datacube shape: {datacube.shape}")
 datacube, noise_cube = cell_8(lens_data_cube, num_pixel, datacube)
 cell_9(datacube)
 cell_10(wavelengths, num_pixel, pixel_size, wavelength_start, wavelength_pixel_size, datacube, noise_cube)
