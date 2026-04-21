@@ -125,7 +125,7 @@ def cell_171(voronoi_binned_spectra, template, spectra_indices, func_globals=Non
 
 @maybe_deterministic
 def cell_18(voronoi_binned_spectra, template):
-    for i in range(5):
+    for i in range(25):
         ppxf_fit = cell_171(voronoi_binned_spectra, template, i, func_globals=globals())
         ppxf_fit.plot()
         plt.savefig(f'squirrel{i + 4}.png')
