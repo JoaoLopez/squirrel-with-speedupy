@@ -131,7 +131,8 @@ def cell_18(voronoi_binned_spectra, template, n):
         plt.savefig(f'squirrel{i + 4}.png')
 
 @initialize_speedupy
-def main(n):
+def main():
+    n = int(sys.argv[1])
     squirrel.__version__
     (data, header, noise) = cell_2()
     cell_3(data, noise)
@@ -152,5 +153,4 @@ def main(n):
     cell_18(voronoi_binned_spectra, template, n)
 
 if __name__ == '__main__':
-    n = int(sys.argv[1])
-    main(n)
+    main()
